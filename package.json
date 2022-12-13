@@ -5,6 +5,9 @@
   "main": "src/app.js",
   "author": "Vadim Pashkov <vadimpashkov.job@gmail.com> (https://github.com/vadimpashkov)",
   "license": "MIT",
+  "scripts": {
+    "build": "npx esbuild src/app.js --bundle --outfile=dist/app.js --platform=node"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "dbffile": "^1.9.2",
