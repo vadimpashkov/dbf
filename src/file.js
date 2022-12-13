@@ -32,7 +32,7 @@ async function saveDBFFile(dbfFields, dbfRecords, path) {
 		await dbfFile.appendRecords(dbfRecords);
 
 		console.info(successColor('.dbf file saved!'));
-		console.info(successColor(`Path to file: ${path}`));
+		console.info(successColor(`Path to file: "${path}"`));
 	} catch (error) {
 		console.error(errorColor('An error occurred while saving the .dbf file'));
 	}
