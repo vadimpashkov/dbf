@@ -1,0 +1,17 @@
+{
+  "name": "dbf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "type": "module",
+  "author": "Vadim Pashkov <vadimpashkov.job@gmail.com> (https://github.com/vadimpashkov)",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "dbffile": "^1.9.2",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "prettier": "2.8.1"
+  }
+}
