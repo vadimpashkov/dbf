@@ -1,10 +1,10 @@
-import fs from 'fs/promises';
+const fs = require('fs/promises');
 
-import { DBFFile } from 'dbffile';
+const { DBFFile } = require('dbffile');
 
-import { errorColor, successColor } from './chalk.js';
+const { errorColor, successColor } = require('./chalk.js');
 
-export async function getTXTFileData(filePath) {
+async function getTXTFileData(filePath) {
 	try {
 		return await fs.readFile(filePath, { encoding: 'utf8' });
 	} catch (error) {
@@ -12,7 +12,7 @@ export async function getTXTFileData(filePath) {
 	}
 }
 
-export async function getDBFFileData(filePath) {
+async function getDBFFileData(filePath) {
 	try {
 		const dbfFileData = await DBFFile.open(filePath);
 		const dbfFileRecords = await dbfFileData.readRecords();
@@ -26,7 +26,7 @@ export async function getDBFFileData(filePath) {
 	}
 }
 
-export async function saveDBFFile(dbfFields, dbfRecords, path) {
+async function saveDBFFile(dbfFields, dbfRecords, path) {
 	try {
 		const dbfFile = await DBFFile.create(path, dbfFields);
 		await dbfFile.appendRecords(dbfRecords);
@@ -37,3 +37,9 @@ export async function saveDBFFile(dbfFields, dbfRecords, path) {
 		console.error(errorColor('An error occurred while saving the .dbf file'));
 	}
 }
+
+module.exports = {
+	getTXTFileData,
+	getDBFFileData,
+	saveDBFFile,
+};

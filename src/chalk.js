@@ -1,5 +1,11 @@
-import chalk from 'chalk';
+const chalk = require('chalk');
 
-export const successColor = chalk.greenBright.inverse;
-export const errorColor = chalk.redBright.inverse;
-export const warningColor = chalk.yellowBright.inverse;
+const successColor = chalk.greenBright.inverse;
+const errorColor = chalk.redBright.inverse;
+const warningColor = chalk.yellowBright.inverse;
+
+module.exports = {
+	successColor,
+	errorColor,
+	warningColor,
+};

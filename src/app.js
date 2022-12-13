@@ -1,10 +1,12 @@
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
+const { resolve } = require('path');
 
-import { errorColor } from './chalk.js';
-import { getJSONConfigData, saveJSONData } from './jsonConfig.js';
-import { getDBFFileData, getTXTFileData, saveDBFFile } from './file.js';
-import { getUsersIdList, deleteUsersFromDBF, generateFileName } from './utils.js';
+const yargs = require('yargs');
+const { hideBin } = require('yargs/helpers');
+
+const { errorColor } = require('./chalk.js');
+const { getJSONConfigData, saveJSONData } = require('./jsonConfig.js');
+const { getDBFFileData, getTXTFileData, saveDBFFile } = require('./file.js');
+const { getUsersIdList, deleteUsersFromDBF, generateFileName } = require('./utils.js');
 
 yargs(hideBin(process.argv))
 	.command(
@@ -27,7 +29,7 @@ yargs(hideBin(process.argv))
 				return;
 			}
 
-			if (ext !== 'txt' || ext !== 'dbf') {
+			if (ext !== 'txt' && ext !== 'dbf') {
 				console.error(errorColor('The file extension can be or .txt or .dbf'));
 				return;
 			}
@@ -60,7 +62,7 @@ yargs(hideBin(process.argv))
 		await saveDBFFile(
 			dbfFileData.fields,
 			dbfRecordsWithoutDefinedUsers,
-			`${config.dbf.path}${generateFileName(config.dbf.fileName)}`,
+			resolve(__dirname, generateFileName(config.dbf.fileName)),
 		);
 	})
 	.parse();

@@ -1,16 +1,12 @@
-import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
-import { errorColor, successColor, warningColor } from './chalk.js';
+const { resolve } = require('path');
+const { errorColor, successColor, warningColor } = require('./chalk.js');
 
-import { readFile, writeFile } from 'fs/promises';
-import { parseFilePath } from './utils.js';
+const { readFile, writeFile } = require('fs/promises');
+const { parseFilePath } = require('./utils.js');
 
-const __filename = fileURLToPath(import.meta.url);
+const PATH_TO_JSON_CONFIG = resolve(__dirname, 'config.json');
 
-const PATH_TO_DIRECTORY = dirname(__filename);
-const PATH_TO_JSON_CONFIG = resolve(PATH_TO_DIRECTORY, 'config.json');
-
-export async function getJSONConfigData() {
+async function getJSONConfigData() {
 	try {
 		const configData = await readFile(PATH_TO_JSON_CONFIG, { encoding: 'utf8' });
 		return configData ? JSON.parse(configData) : undefined;
@@ -29,7 +25,7 @@ async function createJSONConfig() {
 	}
 }
 
-export async function saveJSONData(ext, path) {
+async function saveJSONData(ext, path) {
 	try {
 		let config = await getJSONConfigData();
 
@@ -51,3 +47,8 @@ export async function saveJSONData(ext, path) {
 		console.error(errorColor('An error occurred while saving config data'));
 	}
 }
+
+module.exports = {
+	getJSONConfigData,
+	saveJSONData,
+};

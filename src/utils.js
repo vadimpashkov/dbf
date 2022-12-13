@@ -1,4 +1,4 @@
-export function parseFilePath(fileFullPath) {
+function parseFilePath(fileFullPath) {
 	const fileRegexp = /[\w\-.]+\.[a-z]{2,10}/i;
 	const [fileName] = fileFullPath.match(fileRegexp);
 	const filePath = fileFullPath.replace(fileRegexp, '');
@@ -9,7 +9,7 @@ export function parseFilePath(fileFullPath) {
 	};
 }
 
-export function getUsersIdList(fileDataAsText) {
+function getUsersIdList(fileDataAsText) {
 	const errorsMatchList = Array.from(fileDataAsText.matchAll(/#\s+\d+\s(?<userId>\w+)/gim));
 
 	return errorsMatchList.reduce((userIdList, userData) => {
@@ -18,12 +18,19 @@ export function getUsersIdList(fileDataAsText) {
 	}, []);
 }
 
-export function deleteUsersFromDBF(dbfRecords, userIdList) {
+function deleteUsersFromDBF(dbfRecords, userIdList) {
 	return dbfRecords.filter((record) => !userIdList.includes(record?.GUID1));
 }
 
-export function generateFileName(parentFileName) {
+function generateFileName(parentFileName) {
 	const [fileName, ext] = parentFileName.split('.');
 
 	return `${fileName}-${Date.now()}.${ext}`;
 }
+
+module.exports = {
+	parseFilePath,
+	getUsersIdList,
+	deleteUsersFromDBF,
+	generateFileName,
+};

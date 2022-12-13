@@ -1,13 +1,12 @@
 {
   "name": "dbf",
   "version": "1.0.0",
-  "description": "",
+  "description": "Removing users by ID from DBF file",
   "main": "src/app.js",
-  "type": "module",
   "author": "Vadim Pashkov <vadimpashkov.job@gmail.com> (https://github.com/vadimpashkov)",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^5.2.0",
+    "chalk": "^4.1.2",
     "dbffile": "^1.9.2",
     "yargs": "^17.6.2"
   },
